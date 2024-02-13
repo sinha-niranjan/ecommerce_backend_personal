@@ -80,11 +80,10 @@ export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // email check
-  if (!email ) throw new ApiError(400, "Email is required");
+  if (!email) throw new ApiError(400, "Email is required");
 
   // find user
   const user = await User.findOne({ email });
-
 
   if (!user) {
     throw new ApiError(404, "user not found !");
@@ -121,4 +120,27 @@ export const loginUser = asyncHandler(async (req, res) => {
         "User logged in successfully !"
       )
     );
+});
+
+export const logoutUser = asyncHandler(async (req, res) => {
+  // get user
+  const user = await User.findByIdAndUpdate(
+    req?.user?._id,
+    {
+      $set: { accessToken: undefined },
+    },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  console.log(user);
+  res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refresh", options)
+    .json(new ApiResponse(200, user, "user LogoutSuccessfully !"));
 });
