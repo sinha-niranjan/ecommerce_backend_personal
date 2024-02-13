@@ -24,7 +24,10 @@ export const register = asyncHandler(async (req, res) => {
   // console.log(req.files?.avatar[0]?.path);
 
   // get  user avatar path from  local storage
-  const avatarLocalPath = req.files?.avatar[0]?.path;
+
+  let avatarLocalPath;
+  if (req.files && req.files?.avatar)
+    avatarLocalPath = req.files?.avatar[0]?.path;
 
   // upload avatar to cloudinary
   const cloudinaryAvatar = await uploadOnCloudinary(avatarLocalPath);

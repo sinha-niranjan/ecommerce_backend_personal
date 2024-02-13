@@ -20,7 +20,7 @@ const uploadOnCloudinary = async (localFilePath) => {
     const cloudinary_response = await cloudinary.uploader.upload(
       localFilePath,
       {
-        folder: "Groucery/avatar",
+        folder: "Grocery/avatar",
         resource_type: "auto",
       }
     );
