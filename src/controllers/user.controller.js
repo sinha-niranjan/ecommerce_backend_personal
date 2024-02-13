@@ -21,7 +21,7 @@ export const register = asyncHandler(async (req, res) => {
     throw new ApiError(409, "Email already used for login !!");
   }
 
-  console.log(req.files?.avatar[0]?.path);
+  // console.log(req.files?.avatar[0]?.path);
 
   // get  user avatar path from  local storage
   const avatarLocalPath = req.files?.avatar[0]?.path;
@@ -29,7 +29,7 @@ export const register = asyncHandler(async (req, res) => {
   // upload avatar to cloudinary
   const cloudinaryAvatar = await uploadOnCloudinary(avatarLocalPath);
 
-  console.log(cloudinaryAvatar);
+  // console.log(cloudinaryAvatar);
 
   // save user in database
   const user = await User.create({
