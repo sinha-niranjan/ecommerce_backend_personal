@@ -146,5 +146,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
 });
 
 export const getAllUsers = asyncHandler(async (req, res) => {
-  
-})
+  const users = await User.find();
+
+  res.status(200).json(new ApiResponse(200, users, "All users fetched !"));
+});
