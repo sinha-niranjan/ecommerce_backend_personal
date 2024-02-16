@@ -41,3 +41,15 @@ export const CreateProduct = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, product, "Product is created Successfully !"));
 });
+
+export const getSingleProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const product = await Product.findById(id);
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, product, "Product details is fetched successfully !")
+    );
+});
