@@ -27,12 +27,7 @@ const userSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Please enter Date of birth"],
     },
-    products: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
+     
     password: {
       type: String,
       minLength: 8,
