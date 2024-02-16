@@ -53,3 +53,21 @@ export const getSingleProduct = asyncHandler(async (req, res) => {
       new ApiResponse(200, product, "Product details is fetched successfully !")
     );
 });
+
+export const getAllProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find();
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, products, "All Products fetched !"));
+});
+
+export const getUsersAllProducts = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+
+  const products = await Product.find({ productOwner: userId });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, products, "All Products of a User !"));
+});

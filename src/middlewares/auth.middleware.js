@@ -33,3 +33,11 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
     );
   }
 });
+
+export const AdminAuthorization = asyncHandler(async (req, _,next) => {
+  const user = req.user;
+  if (user.role !== "admin") {
+   throw new ApiError(500, "Unauthorized for this action")
+  }
+  next()
+});
