@@ -150,3 +150,5 @@ export const getAllUsers = asyncHandler(async (req, res) => {
 
   res.status(200).json(new ApiResponse(200, users, "All users fetched !"));
 });
+
+export const deleteUserById = asyncHandler(async (req, res) => {});

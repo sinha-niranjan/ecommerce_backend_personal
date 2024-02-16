@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  deleteUserById,
   getAllUsers,
   loginUser,
   logoutUser,
@@ -25,5 +26,9 @@ router.route("/logout").get(verifyJWT, logoutUser);
 router
   .route("/admin/all-users")
   .get(verifyJWT, AdminAuthorization, getAllUsers);
+
+router
+  .route("/admin/delete/:id")
+  .delete(verifyJWT, AdminAuthorization, deleteUserById);
 
 export default router;
