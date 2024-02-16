@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  deleteCurrentUser,
   deleteUserById,
   getAllUsers,
   loginUser,
@@ -21,6 +22,7 @@ router.route("/login").post(loginUser);
 
 // secured Routes
 router.route("/logout").get(verifyJWT, logoutUser);
+router.route("/delete").delete(verifyJWT, deleteCurrentUser);
 
 // secure Routes for only admin
 router

@@ -170,6 +170,12 @@ export const deleteUserById = asyncHandler(async (req, res) => {
 });
 
 export const deleteCurrentUser = asyncHandler(async (req, res) => {
+  const user = req.user;
+
+  const userId = user._id;
+
+  await User.findOneAndDelete(userId);
+
   res
     .status(200)
     .json(new ApiResponse(200, {}, "Your id is deleted Successfullly !"));
