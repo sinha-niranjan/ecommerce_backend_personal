@@ -154,7 +154,23 @@ export const getAllUsers = asyncHandler(async (req, res) => {
 export const deleteUserById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new ApiError(404, "User not found !");
+  }
+
+  const name = user.name;
+
   await User.findOneAndDelete(id);
 
-  res.status(200).json(new ApiResponse(200, {}, "user deleted successfully !"));
+  res
+    .status(200)
+    .json(new ApiResponse(200, {}, `${name}'s id is deleted successfully ! `));
+});
+
+export const deleteCurrentUser = asyncHandler(async (req, res) => {
+  res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Your id is deleted Successfullly !"));
 });
