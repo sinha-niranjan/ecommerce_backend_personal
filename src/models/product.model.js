@@ -13,10 +13,14 @@ const productSchema = new mongoose.Schema(
     productOwner: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    productImage: {
+      type: String,// cloudinary Image
+      required:true
     },
     stock: {
       type: Number,
-      default: 0,
     },
     tag: {
       type: String,

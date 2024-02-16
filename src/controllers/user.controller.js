@@ -137,7 +137,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
     secure: true,
   };
 
-  console.log(user);
+  // console.log(user);
   res
     .status(200)
     .clearCookie("accessToken", options)
