@@ -7,13 +7,15 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
-      req.header("Authorization")?.replace("Bearer", "");
+      req.header("authorization")?.replace("Bearer", "").replace(" ", "");
 
     if (!token) throw new ApiError(401, "Unauthorized request");
 
-    // console.log(process.env.ACCESS_TOKEN_SECRET);
+    // console.log(token);
 
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    // console.log(decodedToken);
 
     const user = await User.findById(decodedToken?._id).select(
       "-password -refreshToken"
@@ -34,10 +36,10 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
   }
 });
 
-export const AdminAuthorization = asyncHandler(async (req, _,next) => {
+export const AdminAuthorization = asyncHandler(async (req, _, next) => {
   const user = req.user;
   if (user.role !== "admin") {
-   throw new ApiError(500, "Unauthorized for this action")
+    throw new ApiError(500, "Unauthorized for this action");
   }
-  next()
+  next();
 });
