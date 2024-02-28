@@ -6,6 +6,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  tokenResponse,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import {
@@ -22,6 +23,7 @@ router.route("/login").post(loginUser);
 
 // secured Routes
 router.route("/logout").get(verifyJWT, logoutUser);
+router.route("/tokenLogin").get(verifyJWT, tokenResponse);
 router.route("/delete").delete(verifyJWT, deleteCurrentUser);
 
 // secure Routes for only admin

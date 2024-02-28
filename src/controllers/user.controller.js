@@ -112,7 +112,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   res
     .status(200)
     .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken",refreshToken, options)
+    .cookie("refreshToken", refreshToken, options)
     .json(
       new ApiResponse(
         200,
@@ -120,6 +120,11 @@ export const loginUser = asyncHandler(async (req, res) => {
         "User logged in successfully !"
       )
     );
+});
+export const tokenResponse = asyncHandler(async (req, res) => {
+  const user = req?.user;
+  if (!user) throw new ApiError(404, "Invalid token !");
+  res.status(200).json(new ApiResponse(200, user, "token is correct !"));
 });
 
 export const logoutUser = asyncHandler(async (req, res) => {
